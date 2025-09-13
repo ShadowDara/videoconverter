@@ -1,8 +1,12 @@
 package de.shadowdara.videoconverter
 
+import de.shadowdara.daras_library.io.BrowserOpener.openFileInBrowser
+import de.shadowdara.daras_library.io.getCallerJarDirectory
+import de.shadowdara.daras_library.io.getJarDirectory
 import java.awt.BorderLayout
 import java.awt.Component
 import java.awt.Dimension
+import java.io.File
 import javax.swing.BorderFactory
 import javax.swing.Box
 import javax.swing.BoxLayout
@@ -32,6 +36,54 @@ fun createUI(profileNames: Array<String>, config: Config) {
     // Variablen, um Auswahl zu speichern
     var selectedFiles: List<String> = emptyList()
     var selectedExportFolder: String = ""
+
+    // Info Button
+    val openInfoButton = JButton("Open Profile Info")
+    openInfoButton.alignmentX = Component.LEFT_ALIGNMENT
+
+    openInfoButton.addActionListener {
+        // Neues Fenster mit mehreren Buttons öffnen
+        val infoFrame = JFrame("Info Window").apply {
+            defaultCloseOperation = JFrame.DISPOSE_ON_CLOSE
+            setSize(300, 300)
+            setLocationRelativeTo(frame)
+        }
+
+        val panel = JPanel()
+        panel.layout = BoxLayout(panel, BoxLayout.Y_AXIS)
+
+        val button1 = JButton("Profile Info DE")
+        val button2 = JButton("Profile Info EN")
+
+        button1.addActionListener {
+            extractInfo()
+
+            val basePath: String = getCallerJarDirectory().toString()
+            val relativePath: String = "profile-info/de.html"
+
+            // Variante mit File → .path
+            val filePath = File(basePath, relativePath).path
+            openFileInBrowser(filePath)
+        }
+
+        button2.addActionListener {
+            extractInfo()
+
+            val basePath: String = getCallerJarDirectory().toString()
+            val relativePath: String = "profile-info/en.html"
+
+            // Variante mit File → .path
+            val filePath = File(basePath, relativePath).path
+            openFileInBrowser(filePath)
+        }
+
+        // Buttons zum Panel hinzufügen
+        panel.add(button1)
+        panel.add(button2)
+
+        infoFrame.contentPane.add(panel)
+        infoFrame.isVisible = true
+    }
 
     // Choose Files Button
     val chooseFileButton = JButton("Choose Files")
@@ -125,6 +177,7 @@ fun createUI(profileNames: Array<String>, config: Config) {
 
     // UI zusammenbauen
     mainPanel.add(title)
+    mainPanel.add(openInfoButton)
     mainPanel.add(chooseFileButton)
     mainPanel.add(chosenFilesLabel)
     mainPanel.add(chooseExportFolderButton)

@@ -1,5 +1,6 @@
 package de.shadowdara.videoconverter
 
+import de.shadowdara.daras_library.io.JarExtractor.extractFile
 import de.shadowdara.daras_library.io.getCallerJarDirectory
 import java.io.File
 import javax.swing.*
@@ -51,4 +52,10 @@ fun runCommand(vararg command: String): Pair<Int, String> {
         e.printStackTrace()
         -1 to e.message.orEmpty()
     }
+}
+
+fun extractInfo() {
+    extractFile("profile-info/de.html", "profile-info/de.html")
+    extractFile("profile-info/en.html", "profile-info/en.html")
+    extractFile("profile-info/style.css", "profile-info/style.css")
 }
