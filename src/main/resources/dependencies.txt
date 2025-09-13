@@ -1,4 +1,4 @@
 https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-core-jvm/1.9.0/kotlinx-serialization-core-jvm-1.9.0.jar
 https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-json-jvm/1.9.0/kotlinx-serialization-json-jvm-1.9.0.jar
 https://repo1.maven.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/1.9.0/kotlin-stdlib-1.9.0.jar
-https://github.com/ShadowDara/daras_library/releases/download/v0.1.1/daras_library-0.1.1-SNAPSHOT.jar
+https://github.com/ShadowDara/daras_library/releases/download/v0.1.2/daras_library-0.1.2-SNAPSHOT.jar

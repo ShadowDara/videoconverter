@@ -1,13 +1,13 @@
 package de.shadowdara.videoconverter
 
-import de.shadowdara.daras_library.io.getJarDirectory
+import de.shadowdara.daras_library.io.getCallerJarDirectory
 import java.io.File
 import javax.swing.*
 
 fun main() {
     val version = "0.1.0"
 
-    val jarDir = getJarDirectory()
+    val jarDir = getCallerJarDirectory()
     val settingsFile = File(jarDir, "config.videoconverter.json")
     val config = Config(version, settingsFile.absolutePath)
 
