@@ -2,4 +2,6 @@ FFMPEG Video Converter
 by Shadowdara
 Appache 2.0 2025
 
-Project needs JARs in dependencies.txt to run!
+Project needs:
+- JARs in dependencies.txt to run!
+- ffmpge Variable on Path or change in 'config.videoconverter.json'

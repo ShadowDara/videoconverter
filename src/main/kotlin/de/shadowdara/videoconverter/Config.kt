@@ -8,7 +8,6 @@ class Config(private val version: String, val filePath: String) {
     var config: ConfigData
 
     fun load_config() {
-
             val jsonString = File(this.filePath).readText()
 
             val json = Json {
@@ -54,19 +53,70 @@ class Config(private val version: String, val filePath: String) {
             edittime = "",
             ffmpeg = "ffmpeg",
             profiles = listOf(
+                // 🎥 Standardqualität, gut für die meisten Zwecke
                 Profile("Normal",
-                    listOf("-c:v", "libx264", "-preset",
-                    "slow", "-crf", "23", "-c:a", "copy")),
-                Profile("Replay Mod Recordings",
-                    listOf("-c:v", "libx264", "-preset", "fast",
-                        "-crf", "18", "-pix_fmt", "yuv420p", "-r", "60",
-                        "-c:a", "aac", "-b:a", "192k")),
-                Profile("Better Quality",
-                    listOf("-c:v", "libx264", "-preset",
-                        "veryslow", "-crf", "18", "-c:a", "aac", "-b:a", "192k")),
-                Profile("Normal + Nvidia GPU",
-                    listOf("-c:v", "h264_nvenc", "-preset", "slow",
-                        "-cq", "23", "-c:a", "copy")),
+                    listOf("-c:v", "libx264", "-preset", "slow", "-crf", "23", "-c:a", "aac", "-b:a", "192k")),
+
+                // 🎮 Speziell für Replay Mod Aufnahmen
+                Profile("Replay Mod Recording",
+            listOf("-c:v", "libx264", "-preset", "fast", "-crf", "18", "-pix_fmt", "yuv420p", "-r", "60", "-c:a", "aac", "-b:a", "192k")),
+
+                // 📈 Sehr hohe Qualität, langsame Verarbeitung
+                Profile("High Quality (x264)",
+            listOf("-c:v", "libx264", "-preset", "veryslow", "-crf", "18", "-c:a", "aac", "-b:a", "256k")),
+
+                // ⚡ Schnell & effizient
+                Profile("Fast Encoding (x264)",
+            listOf("-c:v", "libx264", "-preset", "ultrafast", "-crf", "28", "-c:a", "aac", "-b:a", "128k")),
+
+                // 🖥️ Für Hardwarebeschleunigung (Nvidia GPU)
+                Profile("NVIDIA GPU (h264_nvenc)",
+            listOf("-c:v", "h264_nvenc", "-preset", "p4", "-cq", "23", "-b:v", "5M", "-c:a", "aac", "-b:a", "192k")),
+
+                // 📱 Für Mobile Devices / YouTube
+                Profile("YouTube / Mobile Optimized",
+            listOf("-c:v", "libx264", "-preset", "slow", "-crf", "23", "-pix_fmt", "yuv420p", "-movflags", "+faststart", "-c:a", "aac", "-b:a", "160k")),
+
+                // 💾 Sehr kleine Dateigröße
+                Profile("Small File (Low Quality)",
+            listOf("-c:v", "libx264", "-preset", "veryfast", "-crf", "32", "-c:a", "aac", "-b:a", "96k")),
+
+                // 🧼 Lossless (ohne Qualitätsverlust)
+                Profile("Lossless (x264)",
+            listOf("-c:v", "libx264", "-preset", "veryslow", "-crf", "0", "-c:a", "flac")),
+
+                // 🌈 HEVC/H.265 – bessere Kompression, braucht stärkere Geräte
+                Profile("HEVC (x265)",
+            listOf("-c:v", "libx265", "-preset", "slow", "-crf", "28", "-c:a", "aac", "-b:a", "160k")),
+
+                // 🔥 NVIDIA GPU mit HEVC
+                Profile("NVIDIA GPU (HEVC)",
+            listOf("-c:v", "hevc_nvenc", "-preset", "p5", "-cq", "28", "-c:a", "aac", "-b:a", "160k")),
+
+                // 🎮 Twitch Streaming Recording
+                Profile("Twitch Recording",
+            listOf("-c:v", "libx264", "-preset", "faster", "-crf", "22", "-r", "30", "-c:a", "aac", "-b:a", "128k")),
+
+                // 📸 Nur Video extrahieren (ohne Audio)
+                Profile("No Audio",
+            listOf("-an", "-c:v", "libx264", "-preset", "medium", "-crf", "23")),
+
+                // 🎧 Nur Audio extrahieren
+                Profile("Audio Only (MP3)",
+            listOf("-vn", "-c:a", "libmp3lame", "-b:a", "192k")),
+
+                // 🧪 Testprofile (Null-Ausgabe)
+                Profile("Benchmark (No Output)",
+            listOf("-f", "null", "-")),
+
+                // 📼 Interlaced Video Encoding
+                Profile("DVD Interlaced (MPEG-2)",
+            listOf("-target", "pal-dvd", "-c:v", "mpeg2video", "-c:a", "ac3", "-b:a", "192k")),
+
+                // 🐢 Super Slow Quality Upload
+                Profile("Very High Quality (Slow Upload)",
+            listOf("-c:v", "libx264", "-preset", "veryslow", "-crf", "16", "-c:a", "aac", "-b:a", "320k")),
+
             )
         )
     }

@@ -38,6 +38,7 @@ fun createUI(profileNames: Array<String>, config: Config) {
     chooseFileButton.alignmentX = Component.LEFT_ALIGNMENT
 
     val chosenFilesLabel = JLabel("No files chosen")
+    chosenFilesLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0))
     chosenFilesLabel.alignmentX = Component.LEFT_ALIGNMENT
 
     chooseFileButton.addActionListener {
@@ -83,7 +84,7 @@ fun createUI(profileNames: Array<String>, config: Config) {
             selectedExportFolder = chooser.selectedFile.absolutePath
             chosenFolderLabel.text = selectedExportFolder
         } else {
-            println("Auswahl abgebrochen.")
+            println("Selection cancelled.")
         }
     }
 

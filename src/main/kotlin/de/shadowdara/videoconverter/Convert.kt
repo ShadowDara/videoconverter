@@ -5,8 +5,17 @@ import java.io.File
 // Beispiel-Signatur deiner convert-Funktion
 fun convert(profile: String, exportFolder: String, files: List<String>, config: Config) {
     println("Converting with profile $profile to $exportFolder")
+    var x = 0
+
+    files.forEach { _ ->
+        x++
+    }
+
+    var y = 0
+
     files.forEach {
-        println("Converting File: $it")
+        y++
+        println("$y/$x: Converting File: $it")
 
         val inputFile = File(it)
         val outputFile = File(exportFolder, inputFile.name).absolutePath
