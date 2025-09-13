@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "de.shadowdara.videoconverter"
-version = "0.1.1-SNAPSHOT"
+version = "0.1.3-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -14,7 +14,7 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
-    implementation(files("libs/daras_library-0.1.2-SNAPSHOT.jar"))
+    implementation(files("libs/daras_library-0.1.4-SNAPSHOT.jar"))
 }
 
 tasks.test {

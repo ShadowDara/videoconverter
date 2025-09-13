@@ -26,7 +26,7 @@ jobs:
       - name: Pull Daras Library
         run: |
           mkdir -p libs
-          curl -L -o libs/daras_library-0.1.2-SNAPSHOT.jar "https://github.com/ShadowDara/daras_library/releases/download/v0.1.2/daras_library-0.1.2-SNAPSHOT.jar"
+          curl -L -o libs/daras_library-0.1.4-SNAPSHOT.jar "https://github.com/ShadowDara/daras_library/releases/download/v0.1.4/daras_library-0.1.4-SNAPSHOT.jar"
 
       - name: Grant execute permission for Gradle wrapper
         run: chmod +x gradlew

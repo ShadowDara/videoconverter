@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FFmpeg Profile Overview for Videoconverter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>🎬 FFmpeg Profile Overview for Videoconverter</h1>
+
+<div class="profile">
+    <h2>🎥 Normal</h2>
+    <p>Standard quality for general purposes. Good balance between quality and file size.</p>
+    <code>-c:v libx264 -preset slow -crf 23 -c:a aac -b:a 192k</code>
+</div>
+
+<div class="profile">
+    <h2>🎮 Replay Mod Recording</h2>
+    <p>Optimized for Minecraft Replay Mod recordings. High frame rate and quality.</p>
+    <code>-c:v libx264 -preset fast -crf 18 -pix_fmt yuv420p -r 60 -c:a aac -b:a 192k</code>
+</div>
+
+<div class="profile">
+    <h2>📈 High Quality (x264)</h2>
+    <p>Very high quality with slow processing. Ideal for high-quality archiving.</p>
+    <code>-c:v libx264 -preset veryslow -crf 18 -c:a aac -b:a 256k</code>
+</div>
+
+<div class="profile">
+    <h2>⚡ Fast Encoding (x264)</h2>
+    <p>Very fast encoding with lower quality. For quick previews or tests.</p>
+    <code>-c:v libx264 -preset ultrafast -crf 28 -c:a aac -b:a 128k</code>
+</div>
+
+<div class="profile">
+    <h2>🖥️ NVIDIA GPU (h264_nvenc)</h2>
+    <p>Hardware-accelerated H.264 encoding with NVIDIA NVENC. Fast and efficient.</p>
+    <code>-c:v h264_nvenc -preset p4 -cq 23 -b:v 5M -c:a aac -b:a 192k</code>
+</div>
+
+<div class="profile">
+    <h2>📱 YouTube / Mobile Optimized</h2>
+    <p>Optimized for uploads to YouTube and mobile devices. Compatible format with "faststart".</p>
+    <code>-c:v libx264 -preset slow -crf 23 -pix_fmt yuv420p -movflags +faststart -c:a aac -b:a 160k</code>
+</div>
+
+<div class="profile">
+    <h2>💾 Small File (Low Quality)</h2>
+    <p>Very small file size at the expense of image quality. Useful for space-saving applications.</p>
+    <code>-c:v libx264 -preset veryfast -crf 32 -c:a aac -b:a 96k</code>
+</div>
+
+<div class="profile">
+    <h2>🧼 Lossless (x264)</h2>
+    <p>Lossless encoding with x264. Perfect for mastering or archiving without quality loss.</p>
+    <code>-c:v libx264 -preset veryslow -crf 0 -c:a flac</code>
+</div>
+
+<div class="profile">
+    <h2>🌈 HEVC (x265)</h2>
+    <p>H.265 / HEVC software encoding with good compression and quality. Requires compatible devices.</p>
+    <code>-c:v libx265 -preset slow -crf 28 -c:a aac -b:a 160k</code>
+</div>
+
+<div class="profile">
+    <h2>🔥 NVIDIA GPU (HEVC)</h2>
+    <p>Hardware-accelerated HEVC encoding with NVIDIA NVENC. For fast, efficient encoding.</p>
+    <code>-c:v hevc_nvenc -preset p5 -cq 28 -c:a aac -b:a 160k</code>
+</div>
+
+<div class="profile">
+    <h2>🎮 Twitch Recording</h2>
+    <p>Optimized profile for livestream recordings at 30 FPS. Good quality at low bitrate.</p>
+    <code>-c:v libx264 -preset faster -crf 22 -r 30 -c:a aac -b:a 128k</code>
+</div>
+
+<div class="profile">
+    <h2>📸 No Audio</h2>
+    <p>Extracts video only without audio track. Useful for silent clips or video editing.</p>
+    <code>-an -c:v libx264 -preset medium -crf 23</code>
+</div>
+
+<div class="profile">
+    <h2>🎧 Audio Only (MP3)</h2>
+    <p>Extracts audio only and encodes it as MP3. Perfect for music, podcasts, etc.</p>
+    <code>-vn -c:a libmp3lame -b:a 192k</code>
+</div>
+
+<div class="profile">
+    <h2>🧪 Benchmark (No Output)</h2>
+    <p>Test profile that produces no file output. Useful for performance measurement (encoding only, no writing).</p>
+    <code>-f null -</code>
+</div>
+
+<div class="profile">
+    <h2>📼 DVD Interlaced (MPEG-2)</h2>
+    <p>Generates an interlaced MPEG-2 video in PAL-DVD format. Suitable for older DVD players and TVs.</p>
+    <code>-target pal-dvd -c:v mpeg2video -c:a ac3 -b:a 192k</code>
+</div>
+
+<div class="profile">
+    <h2>🐢 Very High Quality (Slow Upload)</h2>
+    <p>Extremely high quality with very slow encoding. Ideal for archiving or high-quality uploads.</p>
+    <code>-c:v libx264 -preset veryslow -crf 16 -c:a aac -b:a 320k</code>
+</div>
+
+<div class="profile">
+    <h2>🆕 AV1 (Standard Quality)</h2>
+    <p>Good visual quality with modern compression. Recommended for web videos with small file size.</p>
+    <code>-c:v libaom-av1 -crf 30 -b:v 0 -preset medium -c:a libopus -b:a 128k</code>
+</div>
+
+<div class="profile">
+    <h2>🆕 AV1 (High Quality)</h2>
+    <p>High quality AV1 encoding with lower CRF value. Slow processing but better quality.</p>
+    <code>-c:v libaom-av1 -crf 23 -b:v 0 -preset slow -c:a libopus -b:a 192k</code>
+</div>
+
+<div class="profile">
+    <h2>🆕 AV1 (NVIDIA NVENC)</h2>
+    <p>Fast AV1 encoding with NVIDIA RTX 30xx+ GPUs. Good performance with good quality.</p>
+    <code>-c:v av1_nvenc -cq 28 -preset p5 -c:a aac -b:a 160k</code>
+</div>
+
+<div class="profile">
+    <h2>🌐 AV1 for YouTube/Web</h2>
+    <p>Optimized for streaming platforms like YouTube. Good quality, modern AV1 compression, streamable with <code>+faststart</code>.</p>
+    <code>-c:v libaom-av1 -crf 30 -b:v 0 -preset good -pix_fmt yuv420p -movflags +faststart -c:a libopus -b:a 160k</code>
+</div>
+
+<div class="profile">
+    <h2>💾 Archival (Lossless FFV1)</h2>
+    <p>Lossless archival with the FFV1 codec (recommended for long-term archiving). Audio in FLAC.</p>
+    <code>-c:v ffv1 -level 3 -c:a flac</code>
+</div>
+
+<div class="profile">
+    <h2>📱 Social Media (Mobile)</h2>
+    <p>For vertical video (9:16) on platforms like Instagram, TikTok, etc. 720x1280 resolution at 30 FPS.</p>
+    <code>-c:v libx264 -preset fast -crf 24 -vf scale=720:1280 -r 30 -pix_fmt yuv420p -c:a aac -b:a 128k</code>
+</div>
+
+<div class="profile">
+    <h2>⚙️ Proxy (Superfast Preview)</h2>
+    <p>Extremely fast encoding for preview files or quick transcodes with low quality.</p>
+    <code>-c:v libx264 -preset ultrafast -crf 35 -c:a aac -b:a 96k</code>
+</div>
+
+<div class="profile">
+    <h2>🔄 Remux (No Re-encoding)</h2>
+    <p>Changes only the container format without re-encoding. Fast, lossless process.</p>
+    <code>-c copy</code>
+</div>
+
+<div class="profile">
+    <h2>🎧 Audio Only (Opus)</h2>
+    <p>Extracts audio only and encodes it space-efficiently in modern Opus format.</p>
+    <code>-vn -c:a libopus -b:a 128k</code>
+</div>
+
+<div class="profile">
+    <h2>🌐 VP9 (WebM)</h2>
+    <p>Uses VP9 codec for WebM output. Good compression, but AV1 is generally more efficient.</p>
+    <code>-c:v libvpx-vp9 -crf 32 -b:v 0 -c:a libopus -b:a 128k</code>
+</div>
+
+<div class="profile">
+    <h2>⏱️ Split by 10 Min</h2>
+    <p>Automatically splits video into new segments every 10 minutes. Ideal for longer content or chapter separation.</p>
+    <code>-f segment -segment_time 600 -reset_timestamps 1 -c:v libx264 -crf 23 -preset medium -c:a aac -b:a 128k</code>
+</div>
+
+<div class="profile">
+    <h2>🖥️ Screen Capture (Lossless)</h2>
+    <p>High-quality, lossless screen capture with RGB color space. Perfect for tutorials or software demos.</p>
+    <code>-c:v libx264rgb -preset ultrafast -crf 0 -pix_fmt rgb24 -c:a flac</code>
+</div>
+
+<div class="profile">
+    <h2>🖼️ GIF (Palette Optimized)</h2>
+    <p>Creates an optimized color palette for GIF export. Must be run before the final GIF pass.</p>
+    <code>-vf fps=10,scale=480:-1:flags=lanczos,palettegen -y palette.png</code>
+</div>
+
+<div class="profile">
+    <h2>🖼️ GIF (Final)</h2>
+    <p>Uses the previously generated palette to create the final GIF with reduced colors.</p>
+    <code>-i palette.png -lavfi "fps=10,scale=480:-1:flags=lanczos [x]; [x][1:v] paletteuse" -loop 0</code>
+</div>
+
+<div class="profile">
+    <h2>📺 MPEG-2 (Set-Top Box)</h2>
+    <p>Encoding for old set-top boxes or MPEG-2 compatible devices. Low compression, high compatibility.</p>
+    <code>-c:v mpeg2video -q:v 5 -c:a mp2 -b:a 192k -target pal-dvd</code>
+</div>
+
+<div class="profile">
+    <h2>🔍 Visually Lossless (x264)</h2>
+    <p>Nearly lossless encoding with CRF 16. For quality-conscious users who still want reasonable file sizes.</p>
+    <code>-c:v libx264 -preset slow -crf 16 -c:a aac -b:a 256k</code>
+</div>
+
+<div class="profile">
+    <h2>🎮 Gaming (NVIDIA AV1, High FPS)</h2>
+    <p>High frame rate gaming videos (e.g., 120 FPS) with NVENC-AV1. Good quality with smooth playback.</p>
+    <code>-c:v av1_nvenc -preset p4 -cq 23 -rc vbr -b:v 8M -r 120 -c:a aac -b:a 160k</code>
+</div>
+
+<div class="profile">
+    <h2>🎙️ Podcast / YouTube Audio Normalized</h2>
+    <p>Normalizes audio loudness for podcasts and YouTube, ensuring consistent volume levels. Video is copied unchanged.</p>
+    <code>-af loudnorm=I=-16:TP=-1.5:LRA=11 -c:v copy -c:a aac -b:a 192k</code>
+</div>
+
+<div class="profile">
+    <h2>🎥 Two-Pass (1080p @ 4Mbit) - Pass 1</h2>
+    <p>First pass of two-pass encoding for 1080p video at 4 Mbps bitrate. No audio output, output discarded (analysis only).</p>
+    <code>-c:v libx264 -b:v 4M -pass 1 -an -f mp4 /dev/null</code>
+</div>
+
+<div class="profile">
+    <h2>🎥 Two-Pass (1080p @ 4Mbit) - Pass 2 (Final)</h2>
+    <p>Second pass of two-pass encoding for precise bitrate and better quality at 4 Mbps. Includes AAC audio at 192 kbps.</p>
+    <code>-c:v libx264 -b:v 4M -pass 2 -c:a aac -b:a 192k</code>
+</div>
+
+<div class="profile">
+    <h2>⬜ Square Format (1:1)</h2>
+    <p>Scales video to square format 720x720, ideal for Instagram or other social media, with medium compression quality.</p>
+    <code>-vf scale=720:720 -c:v libx264 -preset medium -crf 23 -pix_fmt yuv420p -c:a aac -b:a 128k</code>
+</div>
+
+</body>
