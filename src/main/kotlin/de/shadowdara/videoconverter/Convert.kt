@@ -1,0 +1,33 @@
+package de.shadowdara.videoconverter
+
+import java.io.File
+
+// Beispiel-Signatur deiner convert-Funktion
+fun convert(profile: String, exportFolder: String, files: List<String>, config: Config) {
+    println("Converting with profile $profile to $exportFolder")
+    files.forEach {
+        println("Converting File: $it")
+
+        val inputFile = File(it)
+        val outputFile = File(exportFolder, inputFile.name).absolutePath
+
+        val args = config.get_args()
+
+        val finalArgs = args.find { it.name == profile }?.arguments
+
+
+        val (exitCode, output) = if (isWindows()) {
+            runCommand("cmd", "/c", config.get_ffmpeg(), "-y", "-i",
+                it, *(finalArgs ?: emptyList()).toTypedArray(), outputFile)
+
+        } else {
+            runCommand(config.get_ffmpeg(), "-y", "-i", it,
+                *(finalArgs ?: emptyList()).toTypedArray(), outputFile)
+        }
+
+        println("Exit code: $exitCode")
+        println("Output:\n$output")
+    }
+
+    println("Finished Conversion for all Files!")
+}

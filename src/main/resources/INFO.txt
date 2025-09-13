@@ -1,0 +1,3 @@
+FFMPEG Video Converter
+by Shadowdara
+Appache 2.0 2025
