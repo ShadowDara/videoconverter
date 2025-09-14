@@ -40,3 +40,20 @@ fun convert(profile: String, exportFolder: String, files: List<String>, config: 
 
     println("Finished Conversion for all Files!")
 }
+
+// function to play a video with ffplay
+fun play_video(config: Config, file: String) {
+    val ffplay = config.get_ffplay()
+
+    println("Playing Video: $file")
+
+    val (exitCode, output) = if (isWindows()) {
+        runCommand("cmd", "/c", ffplay, file)
+
+    } else {
+        runCommand(ffplay, file)
+    }
+
+    println("Exit code: $exitCode")
+    println("Output:\n$output")
+}

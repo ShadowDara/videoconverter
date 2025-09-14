@@ -7,6 +7,7 @@ data class ConfigData(
     var version: String,
     var edittime: String,
     var ffmpeg: String,
+    var ffplay: String,
     var profiles: List<Profile>
 )
 

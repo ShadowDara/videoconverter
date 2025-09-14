@@ -2,21 +2,11 @@ package de.shadowdara.videoconverter
 
 import de.shadowdara.daras_library.io.BrowserOpener.openFileInBrowser
 import de.shadowdara.daras_library.io.getCallerJarDirectory
-import de.shadowdara.daras_library.io.getJarDirectory
 import java.awt.BorderLayout
 import java.awt.Component
 import java.awt.Dimension
 import java.io.File
-import javax.swing.BorderFactory
-import javax.swing.Box
-import javax.swing.BoxLayout
-import javax.swing.JButton
-import javax.swing.JComboBox
-import javax.swing.JFileChooser
-import javax.swing.JFrame
-import javax.swing.JLabel
-import javax.swing.JOptionPane
-import javax.swing.JPanel
+import javax.swing.*
 import javax.swing.filechooser.FileNameExtensionFilter
 import javax.swing.filechooser.FileSystemView
 
@@ -36,6 +26,30 @@ fun createUI(profileNames: Array<String>, config: Config) {
     // Variablen, um Auswahl zu speichern
     var selectedFiles: List<String> = emptyList()
     var selectedExportFolder: String = ""
+
+    val playButton = JButton("Play Video")
+    playButton.alignmentX = Component.LEFT_ALIGNMENT
+
+    playButton.addActionListener {
+        val chooser = JFileChooser()
+        val filter = FileNameExtensionFilter(
+            "Video Files", "mov", "mp4", "mkv"
+        )
+        chooser.setFileFilter(filter)
+        val rueckgabeWert = chooser.showOpenDialog(frame)
+
+        if (rueckgabeWert == JFileChooser.APPROVE_OPTION) {
+            val ausgewaehlteDatei = chooser.selectedFile
+            /*
+            JOptionPane.showMessageDialog(
+                frame,
+                "Selected File: " + ausgewaehlteDatei.absolutePath
+            )
+             */
+
+            play_video(config, ausgewaehlteDatei.absolutePath)
+        }
+    }
 
     // Info Button
     val openInfoButton = JButton("Open Profile Info")
@@ -97,7 +111,7 @@ fun createUI(profileNames: Array<String>, config: Config) {
         val chooser = JFileChooser()
         chooser.fileSelectionMode = JFileChooser.FILES_ONLY
         chooser.isMultiSelectionEnabled = true
-        val filter = FileNameExtensionFilter("Video files (MP4)", "mp4")
+        val filter = FileNameExtensionFilter("Video files", "mp4", "mkv", "mov")
         chooser.fileFilter = filter
 
         val result = chooser.showOpenDialog(frame)
@@ -177,6 +191,7 @@ fun createUI(profileNames: Array<String>, config: Config) {
 
     // UI zusammenbauen
     mainPanel.add(title)
+    mainPanel.add(playButton)
     mainPanel.add(openInfoButton)
     mainPanel.add(chooseFileButton)
     mainPanel.add(chosenFilesLabel)

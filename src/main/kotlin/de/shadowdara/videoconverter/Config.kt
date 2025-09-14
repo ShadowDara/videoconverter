@@ -47,11 +47,16 @@ class Config(private val version: String, val filePath: String) {
         return this.config.ffmpeg
     }
 
+    fun get_ffplay(): String {
+        return this.config.ffplay
+    }
+
     init {
         config = ConfigData(
             version = this.version,
             edittime = "",
             ffmpeg = "ffmpeg",
+            ffplay = "ffplay",
             profiles = listOf(
                 // 🎥 Standardqualität, gut für die meisten Zwecke
                 Profile("Normal",
