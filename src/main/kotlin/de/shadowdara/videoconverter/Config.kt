@@ -8,15 +8,15 @@ class Config(private val version: String, val filePath: String) {
     var config: ConfigData
 
     fun load_config() {
-            val jsonString = File(this.filePath).readText()
+        val jsonString = File(this.filePath).readText()
 
-            val json = Json {
-                ignoreUnknownKeys = true  // <== ignoriert unerwartete JSON-Keys
-                prettyPrint = true
-                isLenient = true          // erlaubt flexiblere Formate
-            }
+        val json = Json {
+            ignoreUnknownKeys = true  // <== ignoriert unerwartete JSON-Keys
+            prettyPrint = true
+            isLenient = true          // erlaubt flexiblere Formate
+        }
 
-            config = json.decodeFromString<ConfigData>(jsonString)
+        config = json.decodeFromString<ConfigData>(jsonString)
     }
 
     fun save_config() {

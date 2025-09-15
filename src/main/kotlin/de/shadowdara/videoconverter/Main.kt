@@ -6,7 +6,7 @@ import java.io.File
 import javax.swing.*
 
 fun main() {
-    val version = "0.1.0"
+    val version = "0.1.4"
 
     val jarDir = getCallerJarDirectory()
     val settingsFile = File(jarDir, "config.videoconverter.json")

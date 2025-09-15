@@ -14,7 +14,7 @@ dependencies {
     testImplementation(kotlin("test"))
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
-    implementation(files("libs/daras_library-0.1.4-SNAPSHOT.jar"))
+    implementation(files("libs/daras_library-0.1.5-SNAPSHOT.jar"))
 }
 
 tasks.test {

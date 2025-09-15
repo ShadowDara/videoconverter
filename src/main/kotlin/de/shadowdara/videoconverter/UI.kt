@@ -40,14 +40,14 @@ fun createUI(profileNames: Array<String>, config: Config) {
 
         if (rueckgabeWert == JFileChooser.APPROVE_OPTION) {
             val ausgewaehlteDatei = chooser.selectedFile
-            /*
-            JOptionPane.showMessageDialog(
-                frame,
-                "Selected File: " + ausgewaehlteDatei.absolutePath
-            )
-             */
+            println("Selected File: " + ausgewaehlteDatei.absolutePath)
 
-            play_video(config, ausgewaehlteDatei.absolutePath)
+            // Asynchron abspielen
+            object : javax.swing.SwingWorker<Unit, Unit>() {
+                override fun doInBackground() {
+                    play_video(config, ausgewaehlteDatei.absolutePath)
+                }
+            }.execute()
         }
     }
 
@@ -183,10 +183,18 @@ fun createUI(profileNames: Array<String>, config: Config) {
             return@addActionListener
         }
 
-        // Hier kannst du deine convert-Funktion aufrufen
-        convert(selectedProfile, selectedExportFolder, selectedFiles, config)
+        // Async starten mit SwingWorker
+        object : javax.swing.SwingWorker<Unit, Unit>() {
+            override fun doInBackground() {
+                // Im Hintergrund (nicht im UI-Thread)
+                convert(selectedProfile, selectedExportFolder, selectedFiles, config)
+            }
 
-        JOptionPane.showMessageDialog(frame, "Conversion Finished!")
+            override fun done() {
+                // Wieder im UI-Thread
+                JOptionPane.showMessageDialog(frame, "Conversion Finished!")
+            }
+        }.execute()
     }
 
     // UI zusammenbauen
