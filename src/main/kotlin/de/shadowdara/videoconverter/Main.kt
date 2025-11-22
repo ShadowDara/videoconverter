@@ -6,7 +6,7 @@ import java.io.File
 import javax.swing.*
 
 fun main() {
-    val version = "0.1.5"
+    val version = "0.1.6"
 
     val jarDir = getCallerJarDirectory()
     val settingsFile = File(jarDir, "config.videoconverter.json")
@@ -37,8 +37,16 @@ fun main() {
     }
 }
 
+/**
+ * Function to check if the operating System is Windows
+ */
 fun isWindows() = System.getProperty("os.name").lowercase().contains("win")
 
+/**
+ * Function to run a command
+ *
+ * @param command
+ */
 fun runCommand(vararg command: String): Pair<Int, String> {
     return try {
         val processBuilder = ProcessBuilder(*command)
@@ -54,6 +62,9 @@ fun runCommand(vararg command: String): Pair<Int, String> {
     }
 }
 
+/**
+ * Function to extract the Info HTML Files of the jar file
+ */
 fun extractInfo() {
     extractFile("profile-info/de.html", "profile-info/de.html")
     extractFile("profile-info/en.html", "profile-info/en.html")

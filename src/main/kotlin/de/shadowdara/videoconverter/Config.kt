@@ -4,6 +4,11 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
 
+/**
+ * Config Class for VideoConverter
+ *
+ * contains a lot of Default Values
+ */
 class Config(private val version: String, val filePath: String) {
     var config: ConfigData
 
@@ -217,6 +222,7 @@ class Config(private val version: String, val filePath: String) {
                 Profile("Two-Pass (1080p @ 4Mbit)",
                     listOf("-c:v", "libx264", "-b:v", "4M", "-pass", "1",
                         "-an", "-f", "mp4", "/dev/null")),
+
                 Profile("Two-Pass (Final)",
                     listOf("-c:v", "libx264", "-b:v", "4M", "-pass", "2",
                         "-c:a", "aac", "-b:a", "192k")),
@@ -225,6 +231,11 @@ class Config(private val version: String, val filePath: String) {
                     listOf("-vf", "scale=720:720", "-c:v", "libx264",
                         "-preset", "medium","-crf", "23", "-pix_fmt", "yuv420p", "-c:a",
                         "aac", "-b:a", "128k")),
+
+                Profile("Delete Background in Video", listOf("-f",
+                    "lavfi", "-i", "color=c=black:s=16x16", "-map", "1:v", "-map", "0:a",
+                    "-c:v", "libx264", "-tune", "stillimage", "-crf", "51", "-preset",
+                    "ultrafast", "-c:a", "copy", "-shortest", "-pix_fmt", "yuv420p"))
             )
         )
     }
